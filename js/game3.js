@@ -30,7 +30,7 @@ function typeWriter(element, text) {
 
   function type() {
     if (index < text.length) {
-      element.innerHTML = text.substr(0, index + 1);
+      element.textContent += text.charAt(index);
       index++;
       soundEffects.keyboard.play(); // riproduci il suono
       setTimeout(type, Math.floor(Math.random() * 40) + 10);
@@ -39,6 +39,7 @@ function typeWriter(element, text) {
 
   type();
 }
+
 
 function playMusicLoop() {
   soundEffects.music.loop = true;
