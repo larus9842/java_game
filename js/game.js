@@ -19,31 +19,16 @@ let questionCounter = 0;
 
 startBtn.addEventListener("click", showInstructions);
 
-function preloadSounds() {
-    const sounds = [
-        'keyboard_sound2.wav',
-        'music.mp3',
-        'success_sound.mp3',
-        'error_sound.mp3'
-    ];
-
-    sounds.forEach(function (sound) {
-        const audio = new Audio(sound);
-        audio.load();
-    });
-}
-
-
 function typeWriter(element, text) {
     let index = 0;
-    const audio = new Audio('keyboard_sound2.wav'); // sostituisci con il percorso del tuo file audio
+    const audio = new Audio('keyboard_sound2.mp3'); // sostituisci con il percorso del tuo file audio
 
     function type() {
         if (index < text.length) {
             element.innerHTML = text.substr(0, index + 1);
             index++;
             audio.play(); // riproduci il suono
-            setTimeout(type, Math.floor(Math.random() * 40) + 10);
+            setTimeout(type, Math.floor(Math.random() * 80) + 40);
         }
     }
 
@@ -70,7 +55,6 @@ function showInstructions() {
     });
 
     container.appendChild(startGameBtn);
-    preloadSounds(); // chiamata alla funzione preloadSounds()
 }
 
 function startGame() {
@@ -135,6 +119,7 @@ function checkAnswer() {
         }, 1500);
     }
 }
+
 
 
 
