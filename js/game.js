@@ -16,18 +16,19 @@
 const startBtn = document.getElementById("start-btn");
 const container = document.getElementById("container");
 let questionCounter = 0;
+let audioLoaded = false;
 
 startBtn.addEventListener("click", showInstructions);
 
 function typeWriter(element, text) {
     let index = 0;
-    const audio = new Audio('keyboard_sound2.wav'); // sostituisci con il percorso del tuo file audio
+    const audio = new Audio('keyboard_sound2.wav');
 
     function type() {
         if (index < text.length) {
-            element.innerHTML = text.substr(0, index + 1);
+            element.innerHTML += text.charAt(index);
             index++;
-            audio.play(); // riproduci il suono
+            audio.play();
             setTimeout(type, Math.floor(Math.random() * 40) + 10);
         }
     }
@@ -77,8 +78,16 @@ function showQuestion() {
     container.appendChild(questionDiv);
 
     typeWriter(questionText, questions[questionCounter].question);
+
     submitBtn.innerText = "Invia";
     submitBtn.addEventListener("click", checkAnswer);
+
+    if (!audioLoaded) {
+        const audio = new Audio('keyboard_sound2.wav');
+        audio.addEventListener('canplaythrough', () => {
+            audioLoaded = true;
+        });
+    }
 }
 
 function showCongrats() {
@@ -108,15 +117,24 @@ function checkAnswer() {
             setTimeout(showQuestion, 1500);
         }
     } else {
-        container.innerHTML = "";
         const errorAudio = new Audio('error_sound.mp3');
         errorAudio.play();
         const errorMsg = document.createElement("p");
         errorMsg.innerText = "Risposta sbagliata. Riprova.";
         container.appendChild(errorMsg);
-        setTimeout(function () {
-            showQuestion();
-        }, 1500);
+
+        const wrongAnswer = document.createElement("p");
+        wrongAnswer.innerText = `La risposta corretta era "${questions[questionCounter].answer}".`;
+        container.appendChild(wrongAnswer);
+
+        const inputField = document.querySelector("input");
+        inputField.value = "";
+
+        inputField.addEventListener("input", function () {
+            errorMsg.style.display = "none";
+            wrongAnswer.style.display = "none";
+        });
     }
 }
+
 
