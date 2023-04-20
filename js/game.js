@@ -28,7 +28,7 @@ function typeWriter(element, text) {
             element.innerHTML = text.substr(0, index + 1);
             index++;
             audio.play(); // riproduci il suono
-            setTimeout(type, Math.floor(Math.random() * 80) + 40);
+            setTimeout(type, Math.floor(Math.random() * 40) + 15);
         }
     }
 
