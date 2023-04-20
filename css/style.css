@@ -1,4 +1,4 @@
-﻿body {
+body {
     background-color: black;
     color: green;
     font-family: monospace;
@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: center;
     background-color: black;
-    width: 50%;
+    width: 90%; /* ridimensiona la larghezza del contenitore */
     border: 2px solid green;
     padding: 2rem;
 }
@@ -37,6 +37,7 @@
         line-height: 1.5;
         font-size: 1.2rem;
         text-align: center;
+        margin: 1rem 0; /* aggiunge un margine al testo */
     }
 
     #container input {
@@ -45,12 +46,12 @@
         font-size: 1.2rem;
         border-radius: 10px;
         border: none;
-        background-color: black; /* colore di sfondo */
-        box-shadow: 0 0 0 3px green; /* margine verde attorno al testo inserito */
+        background-color: black;
+        box-shadow: 0 0 0 3px green;
         color: green;
         font-family: monospace;
+        width: 80%; /* ridimensiona la larghezza dell'input */
     }
-
 
     #container button {
         background-color: green;
@@ -60,6 +61,7 @@
         font-size: 1.2rem;
         border: none;
         margin-top: 1rem;
+        width: 50%; /* ridimensiona la larghezza del pulsante */
     }
 
     #container div {
