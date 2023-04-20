@@ -21,61 +21,6 @@ body {
     margin-bottom: 2rem;
 }
 
-body {
-    background-color: black;
-    color: green;
-    font-family: monospace;
-    font-size: 1.2rem;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-#start-btn {
-    background-color: green;
-    color: black;
-    padding: 1rem;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    border: none;
-    margin-bottom: 2rem;
-}
-
-#container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    width: 90%;
-    padding: 2rem;
-    max-width: 500px; /* aggiunge un limite massimo di larghezza */
-body {
-    background-color: black;
-    color: green;
-    font-family: monospace;
-    font-size: 1.2rem;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-#start-btn {
-    background-color: green;
-    color: black;
-    padding: 1rem;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    border: none;
-    margin-bottom: 2rem;
-}
-
 #container {
     display: flex;
     flex-direction: column;
