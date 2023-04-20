@@ -53,6 +53,38 @@ body {
     width: 90%;
     padding: 2rem;
     max-width: 500px; /* aggiunge un limite massimo di larghezza */
+body {
+    background-color: black;
+    color: green;
+    font-family: monospace;
+    font-size: 1.2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#start-btn {
+    background-color: green;
+    color: black;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    border: none;
+    margin-bottom: 2rem;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 90%; /* ridimensiona la larghezza del contenitore */
+    border: 2px solid green;
+    padding: 2rem;
 }
 
     #container p {
@@ -60,7 +92,7 @@ body {
         line-height: 1.5;
         font-size: 1.2rem;
         text-align: center;
-        margin: 1rem 0;
+        margin: 1rem 0; /* aggiunge un margine al testo */
     }
 
     #container input {
@@ -73,8 +105,7 @@ body {
         box-shadow: 0 0 0 3px green;
         color: green;
         font-family: monospace;
-        width: 100%;
-        max-width: 400px; /* aggiunge un limite massimo di larghezza */
+        width: 80%; /* ridimensiona la larghezza dell'input */
     }
 
     #container button {
@@ -85,8 +116,7 @@ body {
         font-size: 1.2rem;
         border: none;
         margin-top: 1rem;
-        width: 100%;
-        max-width: 300px; /* aggiunge un limite massimo di larghezza */
+        width: 50%; /* ridimensiona la larghezza del pulsante */
     }
 
     #container div {
