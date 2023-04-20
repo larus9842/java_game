@@ -1,4 +1,4 @@
-﻿const questions = [
+const questions = [
     {
         question: "Qual è la capitale dell'Italia?",
         answer: "Roma"
@@ -25,11 +25,10 @@ function typeWriter(element, text) {
 
     function type() {
         if (index < text.length) {
-            element.innerHTML = text.substr(0, index + 1);
+            element.textContent = text.substr(0, index + 1);
             index++;
-            audio.currentTime = 0;
             audio.play(); // riproduci il suono
-            setTimeout(type, Math.floor(Math.random() * 80) + 40);
+            requestAnimationFrame(type);
         }
     }
 
@@ -43,13 +42,13 @@ function playMusicLoop() {
 }
 
 function showInstructions() {
-    container.innerHTML = "";
+    container.textContent = "";
     const instructionsMsg = document.createElement("p");
-    instructionsMsg.innerText = "";
+    instructionsMsg.textContent = "";
     container.appendChild(instructionsMsg);
     typeWriter(instructionsMsg, "Benvenuto al gioco delle domande. Il gioco consiste in 3 domande a cui dovrai rispondere correttamente. Se sbagli, la stessa domanda ti verrà riproposta. Se indovini, passi alla domanda successiva. Buona fortuna!");
     const startGameBtn = document.createElement("button");
-    startGameBtn.innerText = "Avvia gioco";
+    startGameBtn.textContent = "Avvia gioco";
     startGameBtn.addEventListener("click", function () {
         startGame();
         playMusicLoop();
@@ -60,25 +59,25 @@ function showInstructions() {
 
 function startGame() {
     questionCounter = 0;
-    container.innerHTML = "";
+    container.textContent = "";
     showQuestion();
 }
 
 function showQuestion() {
-    container.innerHTML = "";
     const questionDiv = document.createElement("div");
     const questionText = document.createElement("p");
     const answerInput = document.createElement("input");
     const submitBtn = document.createElement("button");
 
-    questionText.innerText = "";
+    questionText.textContent = "";
     questionDiv.appendChild(questionText);
     questionDiv.appendChild(answerInput);
     questionDiv.appendChild(submitBtn);
+    container.textContent = "";
     container.appendChild(questionDiv);
 
     typeWriter(questionText, questions[questionCounter].question);
-    submitBtn.innerText = "Invia";
+    submitBtn.textContent = "Invia";
     submitBtn.addEventListener("click", checkAnswer);
 }
 
@@ -94,41 +93,31 @@ function showCongrats() {
 }
 
 function checkAnswer() {
-    const userAnswer = document.querySelector("input").value.trim().toLowerCase();
+    const userAnswer = document.querySelector("input").value.toLowerCase();
     const correctAnswer = questions[questionCounter].answer.toLowerCase();
-
     if (userAnswer === correctAnswer) {
         questionCounter++;
-
         if (questionCounter === questions.length) {
             showCongrats();
-            return;
+        } else {
+            container.innerHTML = "";
+            const successAudio = new Audio('success_sound.mp3');
+            successAudio.play();
+            const congratsMsg = document.createElement("p");
+            congratsMsg.innerText = "Risposta corretta!";
+            container.appendChild(congratsMsg);
+            setTimeout(showQuestion, 1500);
         }
-
-        const successAudio = new Audio('success_sound.mp3');
-        successAudio.play();
-
-        container.innerHTML = `
-            <p>Risposta corretta!</p>
-            <div>
-                <button id="next-question-btn">Prossima domanda</button>
-            </div>
-        `;
-
-        const nextQuestionBtn = document.getElementById('next-question-btn');
-        nextQuestionBtn.addEventListener('click', showQuestion);
     } else {
+        container.innerHTML = "";
         const errorAudio = new Audio('error_sound.mp3');
         errorAudio.play();
-
-        container.innerHTML = `
-            <p>Risposta sbagliata. Riprova.</p>
-            <div>
-                <button id="retry-btn">Riprova</button>
-            </div>
-        `;
-
-        const retryBtn = document.getElementById('retry-btn');
-        retryBtn.addEventListener('click', showQuestion);
+        const errorMsg = document.createElement("p");
+        errorMsg.innerText = "Risposta sbagliata. Riprova.";
+        container.appendChild(errorMsg);
+        setTimeout(() => {
+            showQuestion();
+        }, 1500);
     }
 }
+
