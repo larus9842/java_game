@@ -1,0 +1,81 @@
+﻿body {
+    background-color: black;
+    color: green;
+    font-family: monospace;
+    font-size: 1.2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#start-btn {
+    background-color: green;
+    color: black;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    border: none;
+    margin-bottom: 2rem;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 90%; /* ridimensiona la larghezza del contenitore */
+    border: 2px solid green;
+    padding: 2rem;
+}
+
+    #container p {
+        color: green;
+        line-height: 1.5;
+        font-size: 1.2rem;
+        text-align: center;
+        margin: 1rem 0; /* aggiunge un margine al testo */
+    }
+
+    #container input {
+        margin-left: 1rem;
+        padding: 0.5rem;
+        font-size: 1.2rem;
+        border-radius: 10px;
+        border: none;
+        background-color: black;
+        box-shadow: 0 0 0 3px green;
+        color: green;
+        font-family: monospace;
+        width: 80%; /* ridimensiona la larghezza dell'input */
+    }
+
+    #container button {
+        background-color: green;
+        color: black;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        border: none;
+        margin-top: 1rem;
+        width: 50%; /* ridimensiona la larghezza del pulsante */
+    }
+
+    #container div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    #container hr {
+        width: 100%;
+        height: 2px;
+        background-color: green;
+        border: none;
+        margin: 2rem 0;
+    }
