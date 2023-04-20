@@ -1,4 +1,4 @@
-﻿const questions = [
+const questions = [
     {
         question: "Qual è la capitale dell'Italia?",
         answer: "Roma"
@@ -16,19 +16,33 @@
 const startBtn = document.getElementById("start-btn");
 const container = document.getElementById("container");
 let questionCounter = 0;
-let audioLoaded = false;
 
 startBtn.addEventListener("click", showInstructions);
 
+function preloadSounds() {
+    const sounds = [
+        'keyboard_sound2.wav',
+        'music.mp3',
+        'success_sound.mp3',
+        'error_sound.mp3'
+    ];
+
+    sounds.forEach(function (sound) {
+        const audio = new Audio(sound);
+        audio.load();
+    });
+}
+
+
 function typeWriter(element, text) {
     let index = 0;
-    const audio = new Audio('keyboard_sound2.wav');
+    const audio = new Audio('keyboard_sound2.wav'); // sostituisci con il percorso del tuo file audio
 
     function type() {
         if (index < text.length) {
-            element.innerHTML += text.charAt(index);
+            element.innerHTML = text.substr(0, index + 1);
             index++;
-            audio.play();
+            audio.play(); // riproduci il suono
             setTimeout(type, Math.floor(Math.random() * 40) + 10);
         }
     }
@@ -56,6 +70,7 @@ function showInstructions() {
     });
 
     container.appendChild(startGameBtn);
+    preloadSounds(); // chiamata alla funzione preloadSounds()
 }
 
 function startGame() {
@@ -78,16 +93,8 @@ function showQuestion() {
     container.appendChild(questionDiv);
 
     typeWriter(questionText, questions[questionCounter].question);
-
     submitBtn.innerText = "Invia";
     submitBtn.addEventListener("click", checkAnswer);
-
-    if (!audioLoaded) {
-        const audio = new Audio('keyboard_sound2.wav');
-        audio.addEventListener('canplaythrough', () => {
-            audioLoaded = true;
-        });
-    }
 }
 
 function showCongrats() {
@@ -117,24 +124,17 @@ function checkAnswer() {
             setTimeout(showQuestion, 1500);
         }
     } else {
+        container.innerHTML = "";
         const errorAudio = new Audio('error_sound.mp3');
         errorAudio.play();
         const errorMsg = document.createElement("p");
         errorMsg.innerText = "Risposta sbagliata. Riprova.";
         container.appendChild(errorMsg);
-
-        const wrongAnswer = document.createElement("p");
-        wrongAnswer.innerText = `La risposta corretta era "${questions[questionCounter].answer}".`;
-        container.appendChild(wrongAnswer);
-
-        const inputField = document.querySelector("input");
-        inputField.value = "";
-
-        inputField.addEventListener("input", function () {
-            errorMsg.style.display = "none";
-            wrongAnswer.style.display = "none";
-        });
+        setTimeout(function () {
+            showQuestion();
+        }, 1500);
     }
 }
+
 
 
