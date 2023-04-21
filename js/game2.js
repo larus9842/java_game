@@ -20,25 +20,53 @@ let questionCounter = 0;
 startBtn.addEventListener("click", showInstructions);
 
 function typeWriter(element, text) {
-  const typingSound = new Audio('lon_keyboard.mp3'); // sostituisci con il percorso del tuo file mp3
-  const delay = 50; // tempo di ritardo tra la digitazione di ogni lettera, in millisecondi
-  const typingDuration = text.length * delay; // durata totale della digitazione, in millisecondi
-  
-  let i = 0;
-  const typeInterval = setInterval(() => {
-    element.textContent += text.charAt(i);
-    typingSound.currentTime = 0; // resetta il suono della digitazione all'inizio
-    typingSound.play();
-    i++;
-    if (i === text.length) {
-      clearInterval(typeInterval);
+  let index = 0;
+  const audio = new Audio('lon_keyboard.mp3');
+  const soundDuration = 100; // ridotto il valore per rendere il suono più "continuo"
+  const typingDelay = 60; // ritardo tra una lettera e l'altra
+  let soundTimeout = null;
+  let typingTimeout = null;
+
+  function playSoundLoop() {
+    audio.play();
+    soundTimeout = setTimeout(playSoundLoop, soundDuration);
+  }
+
+  function stopSoundLoop() {
+    if (soundTimeout) {
+      clearTimeout(soundTimeout);
+      soundTimeout = null;
     }
-  }, delay);
-  
-  setTimeout(() => {
-    typingSound.pause(); // interrompi il suono della digitazione dopo la digitazione del testo
-  }, typingDuration);
+  }
+
+  function type() {
+    if (index < text.length) {
+      element.textContent = text.substr(0, index + 1);
+      index++;
+      if (index === text.length) {
+        setTimeout(() => {
+          stopSoundLoop();
+          const finishAudio = new Audio('lon_keyboard_finish.mp3'); // sostituisci con il percorso del tuo file audio
+          finishAudio.play();
+        }, typingDelay);
+      } else {
+        playSoundLoop();
+      }
+      typingTimeout = setTimeout(type, typingDelay);
+    }
+  }
+
+  playSoundLoop();
+  type();
+
+  return {
+    stop: function() {
+      clearTimeout(typingTimeout);
+      stopSoundLoop();
+    }
+  };
 }
+
 
 function playMusicLoop() {
     const music = new Audio('music.mp3'); // sostituisci con il percorso del tuo file mp3
