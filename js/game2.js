@@ -80,6 +80,7 @@ function showInstructions() {
     instructionsMsg.textContent = "";
     container.appendChild(instructionsMsg);
     typeWriter(instructionsMsg, "Benvenuto al gioco delle domande. Il gioco consiste in 3 domande a cui dovrai rispondere correttamente. Se sbagli, la stessa domanda ti verrà riproposta. Se indovini, passi alla domanda successiva. Buona fortuna!");
+    typeWriter.stop();
     const startGameBtn = document.createElement("button");
     startGameBtn.textContent = "Avvia gioco";
     startGameBtn.addEventListener("click", function () {
@@ -112,6 +113,7 @@ function showQuestion() {
     typeWriter(questionText, questions[questionCounter].question);
     submitBtn.textContent = "Invia";
     submitBtn.addEventListener("click", checkAnswer);
+    typeWriter.stop();
 }
 
 function showCongrats() {
@@ -122,6 +124,7 @@ function showCongrats() {
             const congratsMsg = document.createElement("p");
             container.appendChild(congratsMsg);
             typeWriter(congratsMsg, text);
+            typeWriter.stop();
         });
 }
 
