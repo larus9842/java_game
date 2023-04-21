@@ -20,30 +20,31 @@ let questionCounter = 0;
 startBtn.addEventListener("click", showInstructions);
 
 function typeWriter(element, text) {
-  let index = 0;
-  const audio = new Audio('lon_keyboard.mp3');
-  const soundDuration = 5000;
+    let index = 0;
+    let isFinished = false;
+    const audio = new Audio('lon_keyboard.mp3'); // sostituisci con il percorso del tuo file audio
+    const soundDuration = 5000; // durata in millisecondi del suono di digitazione
 
-  function playSoundLoop() {
-    audio.play();
-    setTimeout(playSoundLoop, soundDuration);
-  }
-
-  function type() {
-    if (index < text.length) {
-      element.textContent = text.substr(0, index + 1);
-      index++;
-      playSoundLoop();
-      requestAnimationFrame(type);
-    } else if (index >= text.length && audio.currentTime < soundDuration) {
-      audio.pause();
-    } else {
-      audio.currentTime = 0;
-      audio.pause();
+    function playSoundLoop() {
+        if (!isFinished) {
+            audio.play();
+            setTimeout(playSoundLoop, soundDuration);
+        }
     }
-  }
 
-  type();
+    function type() {
+        if (index < text.length) {
+            element.textContent = text.substr(0, index + 1);
+            index++;
+            if (index === text.length) {
+                isFinished = true;
+            }
+            playSoundLoop(); // riproduci il suono in loop
+            requestAnimationFrame(type);
+        }
+    }
+
+    type();
 }
 
 function playMusicLoop() {
