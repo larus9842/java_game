@@ -37,7 +37,7 @@ function typeWriter(element, text) {
             requestAnimationFrame(type);
         }
         else {
-            audio.pause();
+            audio.paused = true;
         }
     }
 
