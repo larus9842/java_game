@@ -20,31 +20,32 @@ let questionCounter = 0;
 startBtn.addEventListener("click", showInstructions);
 
 function typeWriter(element, text) {
-    let index = 0;
-    const audio = new Audio('lon_keyboard.mp3'); // sostituisci con il percorso del tuo file audio
-    const soundDuration = 5000; // durata in millisecondi del suono di digitazione
+  let index = 0;
+  const audio = new Audio('lon_keyboard.mp3'); // sostituisci con il percorso del tuo file audio
+  const soundDuration = 5000; // durata in millisecondi del suono di digitazione
+  let isSoundPlaying = false; // variabile per tenere traccia dello stato della riproduzione audio
 
-    function playSoundLoop() {
-        audio.play();
-        setTimeout(playSoundLoop, soundDuration);
+  function playSoundLoop() {
+    isSoundPlaying = true; // impostiamo la variabile a true per indicare che l'audio è in riproduzione
+    audio.play();
+    setTimeout(function() {
+      isSoundPlaying = false; // impostiamo la variabile a false per indicare che l'audio non è più in riproduzione
+    }, soundDuration);
+  }
+
+  function type() {
+    if (index < text.length) {
+      element.textContent = text.substr(0, index + 1);
+      index++;
+      if (!isSoundPlaying) { // riproduci il suono solo se non è già in riproduzione
+        playSoundLoop();
+      }
+      requestAnimationFrame(type);
     }
+  }
 
-    function type() {
-        if (index < text.length) {
-            element.textContent = text.substr(0, index + 1);
-            index++;
-            playSoundLoop(); // riproduci il suono in loop
-            requestAnimationFrame(type);
-        }
-        else {
-            audio.paused = true;
-        }
-    }
-
-    type();
+  type();
 }
-
-
 
 function playMusicLoop() {
     const music = new Audio('music.mp3'); // sostituisci con il percorso del tuo file mp3
