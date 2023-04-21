@@ -21,14 +21,19 @@ startBtn.addEventListener("click", showInstructions);
 
 function typeWriter(element, text) {
     let index = 0;
-    let isFinished = false;
     const audio = new Audio('lon_keyboard.mp3'); // sostituisci con il percorso del tuo file audio
     const soundDuration = 5000; // durata in millisecondi del suono di digitazione
+    let soundTimeout = null;
 
     function playSoundLoop() {
-        if (!isFinished) {
-            audio.play();
-            setTimeout(playSoundLoop, soundDuration);
+        audio.play();
+        soundTimeout = setTimeout(playSoundLoop, soundDuration);
+    }
+
+    function stopSoundLoop() {
+        if (soundTimeout) {
+            clearTimeout(soundTimeout);
+            soundTimeout = null;
         }
     }
 
@@ -37,13 +42,15 @@ function typeWriter(element, text) {
             element.textContent = text.substr(0, index + 1);
             index++;
             if (index === text.length) {
-                isFinished = true;
+                stopSoundLoop();
+            } else {
+                playSoundLoop();
             }
-            playSoundLoop(); // riproduci il suono in loop
             requestAnimationFrame(type);
         }
     }
 
+    playSoundLoop();
     type();
 }
 
