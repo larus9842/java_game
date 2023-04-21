@@ -20,7 +20,7 @@ let questionCounter = 0;
 startBtn.addEventListener("click", showInstructions);
 
 function typeWriter(element, text) {
-  const typingSound = new Audio('typing_sound.mp3'); // sostituisci con il percorso del tuo file mp3
+  const typingSound = new Audio('lon_keyboard.mp3'); // sostituisci con il percorso del tuo file mp3
   const delay = 50; // tempo di ritardo tra la digitazione di ogni lettera, in millisecondi
   const typingDuration = text.length * delay; // durata totale della digitazione, in millisecondi
   
