@@ -47,7 +47,7 @@ body {
         border-radius: 10px;
         border: none;
         background-color: black;
-        box-shadow: 0 0 0 3px green;
+        border: 3px solid green;
         color: green;
         font-family: monospace;
         width: 80%; /* ridimensiona la larghezza dell'input */
