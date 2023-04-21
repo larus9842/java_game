@@ -36,10 +36,14 @@ function typeWriter(element, text) {
             playSoundLoop(); // riproduci il suono in loop
             requestAnimationFrame(type);
         }
+        else {
+            audio.pause();
+        }
     }
 
     type();
 }
+
 
 
 function playMusicLoop() {
