@@ -73,7 +73,7 @@ const questions = [
     },
     {
         question: "Giannandrea, ciao. Avverti Davide Perticone e Cocuzza che domani...",
-        answer: "Si devono fare inrerrogare in greco"
+        answer: "Si devono fare interrogare in greco"
     },
     {
         question: "Quale animale si siede, sta in piedi e cammina?",
