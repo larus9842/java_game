@@ -20,38 +20,24 @@ let questionCounter = 0;
 startBtn.addEventListener("click", showInstructions);
 
 function typeWriter(element, text) {
-    let index = 0;
-    const audio = new Audio('lon_keyboard.mp3'); // sostituisci con il percorso del tuo file audio
-    const soundDuration = 5000; // durata in millisecondi del suono di digitazione
-    let soundTimeout = null;
-
-    function playSoundLoop() {
-        audio.play();
-        soundTimeout = setTimeout(playSoundLoop, soundDuration);
+  const typingSound = new Audio('typing_sound.mp3'); // sostituisci con il percorso del tuo file mp3
+  const delay = 50; // tempo di ritardo tra la digitazione di ogni lettera, in millisecondi
+  const typingDuration = text.length * delay; // durata totale della digitazione, in millisecondi
+  
+  let i = 0;
+  const typeInterval = setInterval(() => {
+    element.textContent += text.charAt(i);
+    typingSound.currentTime = 0; // resetta il suono della digitazione all'inizio
+    typingSound.play();
+    i++;
+    if (i === text.length) {
+      clearInterval(typeInterval);
     }
-
-    function stopSoundLoop() {
-        if (soundTimeout) {
-            clearTimeout(soundTimeout);
-            soundTimeout = null;
-        }
-    }
-
-    function type() {
-        if (index < text.length) {
-            element.textContent = text.substr(0, index + 1);
-            index++;
-            if (index === text.length) {
-                stopSoundLoop();
-            } else {
-                playSoundLoop();
-            }
-            requestAnimationFrame(type);
-        }
-    }
-
-    playSoundLoop();
-    type();
+  }, delay);
+  
+  setTimeout(() => {
+    typingSound.pause(); // interrompi il suono della digitazione dopo la digitazione del testo
+  }, typingDuration);
 }
 
 function playMusicLoop() {
