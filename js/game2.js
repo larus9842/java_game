@@ -21,19 +21,26 @@ startBtn.addEventListener("click", showInstructions);
 
 function typeWriter(element, text) {
     let index = 0;
-    const audio = new Audio('keyboard_sound2.mp3'); // sostituisci con il percorso del tuo file audio
+    const audio = new Audio('lon_keyboard.mp3'); // sostituisci con il percorso del tuo file audio
+    const soundDuration = 5000; // durata in millisecondi del suono di digitazione
+
+    function playSoundLoop() {
+        audio.play();
+        setTimeout(playSoundLoop, soundDuration);
+    }
 
     function type() {
         if (index < text.length) {
             element.textContent = text.substr(0, index + 1);
             index++;
-            audio.play(); // riproduci il suono
+            playSoundLoop(); // riproduci il suono in loop
             requestAnimationFrame(type);
         }
     }
 
     type();
 }
+
 
 function playMusicLoop() {
     const music = new Audio('music.mp3'); // sostituisci con il percorso del tuo file mp3
@@ -120,4 +127,5 @@ function checkAnswer() {
         }, 1500);
     }
 }
+
 
